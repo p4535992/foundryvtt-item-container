@@ -15,16 +15,16 @@
  */
 export class ItemPlaceableConfig extends ItemSheet {
   // DocumenSheet
-  // /** @inheritdoc */
-  // static get defaultOptions () {
-  //   return foundry.utils.mergeObject(super.defaultOptions, {
-  //     classes: ['sheet', 'itemPlaceable-sheet'],
-  //     title: 'itemPlaceables.ui.config.title',
-  //     template: 'modules/itemPlaceables/templates/itemPlaceable-config.hbs',
+  /** @inheritdoc */
+  static get defaultOptions() {
+    return mergeObject(super.defaultOptions, {
+      classes: ['sheet', 'itemPlaceable-sheet', 'item'],
+      title: 'itemPlaceables.ui.config.title',
+        //     template: 'modules/itemPlaceables/templates/itemPlaceable-config.hbs',
   //     width: 480,
   //     tabs: [{ navSelector: '.tabs', contentSelector: 'form', initial: 'main' }]
-  //   })
-  // }
+    });
+  }
   // /* -------------------------------------------- */
   // /** @override */
   // getData (options) {

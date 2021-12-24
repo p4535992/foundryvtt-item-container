@@ -14,10 +14,13 @@ export class ItemPlaceableControlIcon extends ControlIcon {
   statusColor;
   label;
 
-  constructor({ label = '', textStyle = '', typeColor = 0x000000, statusColor = 0x000000, ...options } = {}, ...args) {
+  constructor(
+    { texture = '', label = '', textStyle = '', typeColor = 0x000000, statusColor = 0x000000, ...options } = {},
+    ...args
+  ) {
     const size = ItemPlaceableControlIcon.iconSize;
     super({
-      texture: label,
+      texture: texture,
       size: size,
       borderColor: typeColor,
       tint: statusColor,

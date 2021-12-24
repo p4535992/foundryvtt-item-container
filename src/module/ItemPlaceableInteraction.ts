@@ -1,3 +1,4 @@
+import { ItemPlaceable } from './ItemPlaceable';
 import { getCanvas, getGame } from './settings';
 
 export const GMs = () => {
@@ -11,7 +12,7 @@ const isFirstGM = () => {
 };
 
 export const handleTokenSelectRequestPlayer = async (data) => {
-  const { selectedTokenIds, targetSceneId, targetData, userId } = data;
+  const { selectedItemPlaceableIds, targetSceneId, targetData, userId } = data;
 
   // ignore requests for other players
   if (userId !== getGame().userId) {
@@ -19,29 +20,30 @@ export const handleTokenSelectRequestPlayer = async (data) => {
   }
 
   // find target scene
-  const targetScene = getGame().scenes?.find((scene) => scene._id === targetSceneId);
-  if (!targetScene) {
-    console.warn('target scene not found', data);
-    return;
-  }
+  // const targetScene = getGame().scenes?.find((scene) => scene.id === targetSceneId);
+  // if (!targetScene) {
+  //   console.warn('target scene not found', data);
+  //   return;
+  // }
 
   // switch to target scene
-  await targetScene.view();
+  // await targetScene.view();
 
   // TODO: we may do a premature select if the tokens aren't there yet
   // we then may end up with a different token selected
 
-  // re-select tokens on target scene
-  const targetTokens = <Token[]>(
-    getCanvas().tokens?.placeables.filter((token) => selectedTokenIds.indexOf(token.id) >= 0)
-  );
-  for (const token of targetTokens) {
-    token.control();
+  // re-select itemPlaceables on target scene
+  const targetItemPlaceables = <
+    ItemPlaceable[] //@ts-ignore
+  >getCanvas().itemPlaceable?.placeables.filter((token) => selectedItemPlaceableIds.indexOf(token.id) >= 0);
+  for (const itemPlaceable of targetItemPlaceables) {
+    itemPlaceable.control();
   }
 
   // pan to itemPlaceable target
   getCanvas().pan({ x: targetData.x, y: targetData.y });
 
   // call hook
-  Hooks.callAll('ItemPlaceableRender', data);
+  // TODO add click handler
+  // Hooks.callAll('ItemPlaceableRender', data);
 };

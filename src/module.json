@@ -1,6 +1,6 @@
 {
   "name": "foundryvtt-item-placeable",
-  "title": "Item PLaceable",
+  "title": "Item Placeable",
   "description": "Item Placeable on canvas or scene",
   "version": "0.0.1",
   "author": "p4535992",
@@ -42,7 +42,7 @@
   "systems": [],
   "esmodules": ["main.js"],
   "styles": [],
-  "minimumCoreVersion": "0.8.8",
+  "minimumCoreVersion": "0.8.9",
   "compatibleCoreVersion": "0.8.9",
   "url": "https://github.com/p4535992/foundryvtt-item-placeable",
   "manifest": "https://github.com/p4535992/foundryvtt-item-placeable/releases/latest/download/module.json",

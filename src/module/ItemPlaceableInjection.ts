@@ -5,6 +5,7 @@ import { ItemPlaceableControl } from './ItemPlaceableControl';
 import { ItemPlaceableConfig } from './ItemPlaceableConfig';
 import { BaseItemPlaceable } from './BaseItemPlaceable';
 import { getCanvas, getGame } from './settings';
+import { ItemPlaceableLayer } from './ItemPlaceableLayer';
 
 const fields = foundry.data.fields;
 
@@ -14,8 +15,8 @@ export const injectItemPlaceables = () => {
   CONFIG.ItemPlaceable = {
     documentClass: ItemPlaceableDocument,
     objectClass: ItemPlaceable,
-    // layerClass: ItemPlaceableLayer,
-    sheetClass: ItemPlaceableConfig,
+    layerClass: ItemPlaceableLayer,
+    sheetClass: ItemPlaceableConfig, // extend ItemSheet
   };
 
   hookCanvas();
@@ -137,9 +138,9 @@ const hookControlsLayer = () => {
     this.itemPlaceables.visible = !getCanvas().itemPlaceables._active;
   };
   ControlsLayer.prototype.createItemPlaceableControl = function (itemPlaceable) {
-    const sw = this.itemPlaceables.addChild(new ItemPlaceableControl(itemPlaceable));
-    sw.visible = false;
-    sw.draw();
+    const ip = this.itemPlaceables.addChild(new ItemPlaceableControl(itemPlaceable));
+    ip.visible = false;
+    ip.draw();
   };
 };
 */

@@ -38,12 +38,14 @@ export class ItemPlaceableData extends ItemData {
    */
   static DEFAULT_ICON: string;
 
-  x;
-  y;
+  x: number;
+  y: number;
+  hidden: boolean;
+  elevation: number;
 
   static defineSchema(): ItemPlaceableDataSchema {
     return {
-      // Original itemdata
+      // Original item data
       _id: fields.DOCUMENT_ID,
       name: fields.REQUIRED_STRING,
       type: {
@@ -59,7 +61,7 @@ export class ItemPlaceableData extends ItemData {
       sort: <any>fields.INTEGER_SORT_FIELD,
       permission: <any>fields.DOCUMENT_PERMISSIONS,
       flags: <any>fields.OBJECT_FIELD,
-      // Added
+      // Added item placeable data
       scene: <any>{
         _id: <any>'',
         required: false,
@@ -83,5 +85,7 @@ export class ItemPlaceableData extends ItemData {
     super._initialize();
     this.x = Math.round(this.x);
     this.y = Math.round(this.y);
+    this.hidden = false;
+    this.elevation = 0;
   }
 }

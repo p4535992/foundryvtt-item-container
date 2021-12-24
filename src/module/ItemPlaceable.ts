@@ -251,7 +251,7 @@ export class ItemPlaceable extends PlaceableObject {
       new ItemPlaceableControlIcon({
         label: this.label,
         textStyle: this.labelTextStyle,
-        // texture: this.icon,
+        texture: this.iconSrc, //this.icon,
       }),
     );
     this.lockIcon = this.addChild(new PIXI.Sprite());
