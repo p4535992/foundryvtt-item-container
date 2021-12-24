@@ -13,6 +13,7 @@ export class ItemPlaceableControlIcon extends ControlIcon {
   typeColor;
   statusColor;
   label;
+  tint;
 
   constructor(
     { texture = '', label = '', textStyle = '', typeColor = 0x000000, statusColor = 0x000000, ...options } = {},
@@ -31,6 +32,7 @@ export class ItemPlaceableControlIcon extends ControlIcon {
     this.labelTextStyle = textStyle;
     this.typeColor = typeColor;
     this.statusColor = statusColor;
+    this.tint = statusColor;
 
     // add offset
     const offset = size * 0.5;

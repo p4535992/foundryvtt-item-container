@@ -20,9 +20,9 @@ export class ItemPlaceableConfig extends ItemSheet {
     return mergeObject(super.defaultOptions, {
       classes: ['sheet', 'itemPlaceable-sheet', 'item'],
       title: 'itemPlaceables.ui.config.title',
-        //     template: 'modules/itemPlaceables/templates/itemPlaceable-config.hbs',
-  //     width: 480,
-  //     tabs: [{ navSelector: '.tabs', contentSelector: 'form', initial: 'main' }]
+      //     template: 'modules/itemPlaceables/templates/itemPlaceable-config.hbs',
+      //     width: 480,
+      //     tabs: [{ navSelector: '.tabs', contentSelector: 'form', initial: 'main' }]
     });
   }
   // /* -------------------------------------------- */

@@ -55,7 +55,7 @@ export class ItemPlaceableData extends ItemData {
         validationError: 'The provided Item type must be in the array of types defined by the game system',
       },
       img: <any>'',
-      data: <any>{}, // TODO
+      data: <any>{},
       effects: <any>{},
       folder: <any>{},
       sort: <any>fields.INTEGER_SORT_FIELD,
@@ -86,6 +86,6 @@ export class ItemPlaceableData extends ItemData {
     this.x = Math.round(this.x);
     this.y = Math.round(this.y);
     this.hidden = false;
-    this.elevation = 0;
+    this.elevation = NaN;
   }
 }

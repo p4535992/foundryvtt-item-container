@@ -96,7 +96,7 @@ async function _dropItem(item: Item, xPosition: number, yPosition: number, isHid
 
   itemPlaceableData.hidden = <boolean>isHidden;
 
-  if (elevation) {
+  if (elevation && !isNaN(elevation)) {
     itemPlaceableData.elevation = elevation;
   }
 

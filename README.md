@@ -14,7 +14,6 @@ This module add to foundry a placeable object for the item document
 
 Still in beta
 
-
 ## Installation
 
 It's always easiest to install modules from the in game add-on browser.
@@ -116,19 +115,14 @@ Any issues, bugs, or feature requests are always welcome to be reported directly
 
 This package is under an [MIT](LICENSE) and the [Foundry Virtual Tabletop Limited License Agreement for module development](https://foundryvtt.com/article/license/).
 
-- [MIT License](https://github.com/sPOiDar/fvtt-module-better-target/blob/master/LICENSE) from [Better Target](https://github.com/sPOiDar/fvtt-module-better-target)
+- [MIT License](https://github.com/DFreds/dfreds-droppables/blob/main/LICENSE) from [DFreds Droppables](https://github.com/DFreds/dfreds-droppables)
+- [MIT License](https://gitlab.com/SWW13/foundryvtt-stairways/-/blob/development/LICENSE) from [Stairway](https://gitlab.com/SWW13/foundryvtt-stairways)
 ## Credit
 
 Thanks to anyone who helps me with this code! I appreciate the user community's feedback on this project!
 
-- [easy target](https://bitbucket.org/Fyorl/easy-target/src/master/) thanks to [Fyorl](https://bitbucket.org/%7Beee45cf2-a6e7-43d6-bded-8054de334101%7D/)
-- [Better Target](https://github.com/sPOiDar/fvtt-module-better-target) thanks to [sPOiDar](https://github.com/sPOiDar/fvtt-module-better-target)
-- [Target Enhancements](https://github.com/eadorin/target-enhancements) thanks to [eadorin](https://github.com/eadorin)
-- [T is for target](https://github.com/basicer/foundryvtt-t-is-for-target) ty to [basicer](https://github.com/basicer)
-- [SmartTarget](https://github.com/theripper93/Smart-Target) ty to [theripper93](https://github.com/theripper93)
-
-## Acknowledgements
+- [Stairway](https://gitlab.com/SWW13/foundryvtt-stairways) thanks to [SWW13](https://gitlab.com/SWW13)
+- [DFreds Droppables](https://github.com/DFreds/dfreds-droppables) thanks to [DFreds](https://github.com/DFreds)
 
 Bootstrapped with League of Extraordinary FoundryVTT Developers  [foundry-vtt-types](https://github.com/League-of-Foundry-Developers/foundry-vtt-types).
 
-Mad props to the 'League of Extraordinary FoundryVTT Developers' community which helped me figure out a lot.

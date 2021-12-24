@@ -3,9 +3,10 @@ import { ItemPlaceable } from './ItemPlaceable';
 import { ItemPlaceableDocument } from './ItemPlaceableDocument';
 import { getGame, getCanvas } from './settings';
 
-// Between WallsLayer (40) and TemplateLayer (50)
-const ITEM_PLACEABLE_LAYER_ZINDEX = 42;
+// Between WallsLayer (40), TemplateLayer (50), TokenLayer (100)
+const ITEM_PLACEABLE_LAYER_ZINDEX = 101;
 
+TokenLayer
 /**
  * The ItemPlaceable Layer which displays itemPlaceable icons within the rendered Scene.
  * @extends {PlaceablesLayer}
@@ -78,7 +79,7 @@ export class ItemPlaceableLayer extends PlaceablesLayer {
     const { origin } = event.data;
 
     // get options from layer control
-    // TODO: `animate` should be synced with partner
+    // `animate` should be synced with partner
     const animate = this._animate === true;
     const disabled = this._disabled === true;
     const hidden = this._hidden === true;
@@ -90,6 +91,8 @@ export class ItemPlaceableLayer extends PlaceablesLayer {
     // cls.create(itemPlaceable.data.toObject(false), { parent: canvas.scene })
 
     // itemPlaceable.draw()
+
+    // TODO do something ?
   }
 
   /* -------------------------------------------- */

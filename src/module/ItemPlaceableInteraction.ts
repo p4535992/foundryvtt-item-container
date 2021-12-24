@@ -33,9 +33,11 @@ export const handleTokenSelectRequestPlayer = async (data) => {
   // we then may end up with a different token selected
 
   // re-select itemPlaceables on target scene
-  const targetItemPlaceables = <
-    ItemPlaceable[] //@ts-ignore
-  >getCanvas().itemPlaceable?.placeables.filter((token) => selectedItemPlaceableIds.indexOf(token.id) >= 0);
+  const targetItemPlaceables =
+    //@ts-ignore
+    getCanvas().itemPlaceable?.placeables.filter((token) => {
+      selectedItemPlaceableIds.indexOf(token.id) >= 0;
+    });
   for (const itemPlaceable of targetItemPlaceables) {
     itemPlaceable.control();
   }

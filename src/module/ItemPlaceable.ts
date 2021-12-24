@@ -265,63 +265,61 @@ export class ItemPlaceable extends PlaceableObject {
   /* -------------------------------------------- */
 
   /** @override */
-  refresh() {
+  refresh(): this {
+    // update state
+    this.position.set(this.data.x, this.data.y);
+    // this.updateOtherPlaceable();
+    // this.updateConnectionTarget();
+    // this.updateMaster();
+
+    // clear old line
+    this.line.clear();
+
+    // draw line when master or during move
+    /*
+    const renderState = this.renderState;
+    if (renderState === 'master' || renderState === 'move') {
+      // clear slave line
+      if (renderState === 'master') {
+        this.otherPlaceable.line.clear();
+      }
+
+      // draw connection line
+      this.line
+        .lineStyle(3, this.data.animate ? 0xccccff : 0x9fe2bf)
+        .moveTo(0, 0)
+        .lineTo(this.otherPlaceable.data.x - this.data.x, this.otherPlaceable.data.y - this.data.y);
+
+      // set other itemPlaceable in front of us (and therfore the line)
+      // TODO: this is not working for 'move' as those itemPlaceables are stored in this.layer.preview
+      this.zIndex = -1;
+      this.otherPlaceable.zIndex = 1;
+    } else if (renderState === 'slave') {
+      // trigger master update
+      this.otherPlaceable.refresh();
+    }
+    */
+    // update icon tint
+    /*
+    const { background, border } = this.status.color;
+    this.controlIcon.tint = this.data.disabled === true ? 0x999999 : 0x000000;
+    this.controlIcon.typeColor = background;
+    this.controlIcon.statusColor = border;
+    this.controlIcon.draw();
+    */
+    // lock icon
+    this.lockIcon.width = this.lockIcon.height = ItemPlaceableControlIcon.iconSize * 0.5;
+    this.lockIcon.texture = 'icons/svg/padlock.svg'; // await loadTexture('icons/svg/padlock.svg');
+
+    // Update visibility
+    this.alpha = this.data.hidden === true ? 0.5 : 1.0;
+    this.line.visible = this.layer._accessibleActive;
+    this.lockIcon.visible = this.layer._accessibleActive && this.data.disabled === true;
+    this.controlIcon.visible = this.layer._accessibleActive;
+    this.controlIcon.border.visible = this._hover; // || this.isConnectionTarget;
+
     return this;
   }
-  // /** @override */
-  // refresh(): this {
-  //   // update state
-  //   this.position.set(this.data.x, this.data.y);
-  //   this.updateOtherPlaceable();
-  //   // this.updateConnectionTarget();
-  //   this.updateMaster();
-
-  //   // clear old line
-  //   this.line.clear();
-
-  //   // draw line when master or during move
-  //   const renderState = this.renderState;
-  //   if (renderState === 'master' || renderState === 'move') {
-  //     // clear slave line
-  //     if (renderState === 'master') {
-  //       this.otherPlaceable.line.clear();
-  //     }
-
-  //     // draw connection line
-  //     this.line
-  //       .lineStyle(3, this.data.animate ? 0xccccff : 0x9fe2bf)
-  //       .moveTo(0, 0)
-  //       .lineTo(this.otherPlaceable.data.x - this.data.x, this.otherPlaceable.data.y - this.data.y);
-
-  //     // set other itemPlaceable in front of us (and therfore the line)
-  //     // TODO: this is not working for 'move' as those itemPlaceables are stored in this.layer.preview
-  //     this.zIndex = -1;
-  //     this.otherPlaceable.zIndex = 1;
-  //   } else if (renderState === 'slave') {
-  //     // trigger master update
-  //     this.otherPlaceable.refresh();
-  //   }
-
-  //   // update icon tint
-  //   const { background, border } = this.status.color;
-  //   this.controlIcon.tint = this.data.disabled === true ? 0x999999 : 0x000000;
-  //   this.controlIcon.typeColor = background;
-  //   this.controlIcon.statusColor = border;
-  //   this.controlIcon.draw();
-
-  //   // lock icon
-  //   this.lockIcon.width = this.lockIcon.height = ItemPlaceableControlIcon.iconSize * 0.5;
-  //   this.lockIcon.texture = await loadTexture('icons/svg/padlock.svg');
-
-  //   // Update visibility
-  //   this.alpha = this.data.hidden === true ? 0.5 : 1.0;
-  //   this.line.visible = this.layer._active;
-  //   this.lockIcon.visible = this.layer._active && this.data.disabled === true;
-  //   this.controlIcon.visible = this.layer._active;
-  //   this.controlIcon.border.visible = this._hover || this.isConnectionTarget;
-
-  //   return this;
-  // }
 
   /* -------------------------------------------- */
 
@@ -408,7 +406,9 @@ export class ItemPlaceable extends PlaceableObject {
 
   /** @override */
   destroy(...args) {
-    if (this.itemPlaceableControl) this.itemPlaceableControl.destroy({ children: true });
+    if (this.itemPlaceableControl){
+      this.itemPlaceableControl.destroy({ children: true });
+    }
     super.destroy(...args);
   }
 
