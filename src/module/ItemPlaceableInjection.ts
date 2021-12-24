@@ -1,10 +1,10 @@
-import { ItemPlaceableLayer } from './ItemPlaceableLayer.js';
-import { ItemPlaceableDocument } from './ItemPlaceableDocument.js';
-import { ItemPlaceable } from './ItemPlaceable.js';
-import { ItemPlaceableControl } from './ItemPlaceableControl.js';
-import { ItemPlaceableConfig } from './ItemPlaceableConfig.js';
-import { BaseItemPlaceable } from './BaseItemPlaceable.js';
-import { getCanvas, getGame } from './settings.js';
+// import { ItemPlaceableLayer } from './ItemPlaceableLayer';
+import { ItemPlaceableDocument } from './ItemPlaceableDocument';
+import { ItemPlaceable } from './ItemPlaceable';
+import { ItemPlaceableControl } from './ItemPlaceableControl';
+import { ItemPlaceableConfig } from './ItemPlaceableConfig';
+import { BaseItemPlaceable } from './BaseItemPlaceable';
+import { getCanvas, getGame } from './settings';
 
 const fields = foundry.data.fields;
 
@@ -14,14 +14,14 @@ export const injectItemPlaceables = () => {
   CONFIG.ItemPlaceable = {
     documentClass: ItemPlaceableDocument,
     objectClass: ItemPlaceable,
-    layerClass: ItemPlaceableLayer,
+    // layerClass: ItemPlaceableLayer,
     sheetClass: ItemPlaceableConfig,
   };
 
   hookCanvas();
   hookBaseScene();
   hookSceneData();
-  hookControlsLayer();
+  // hookControlsLayer();
   hookTokenLayer();
 
   // add itemPlaceables as embedded document for existing scenes
@@ -46,7 +46,7 @@ const hookCanvas = () => {
 
     // inject itemPlaceables layer after tokens
 
-    if (key === 'tokens'){
+    if (key === 'tokens') {
       //@ts-ignore
       layers.itemPlaceables = CONFIG.ItemPlaceable.layerClass;
     }
@@ -103,16 +103,20 @@ const hookBaseScene = () => {
 const hookSceneData = () => {
   // inject BaseItemPlaceable into SceneData schema
   const SceneData = foundry.data.SceneData;
+  //@ts-ignore
   const sceneSchema = SceneData.prototype.constructor.defineSchema;
   // Hook the SceneData#defineSchema getter
+  //@ts-ignore
   SceneData.prototype.constructor.defineSchema = function () {
     const schema = sceneSchema.call(this);
+    //@ts-ignore
     schema.itemPlaceables = fields.embeddedCollectionField(BaseItemPlaceable);
 
     return schema;
   };
 };
 
+/*
 const hookControlsLayer = () => {
   // Hook ControlsLayer.draw
   const origDraw = ControlsLayer.prototype.draw;
@@ -138,6 +142,7 @@ const hookControlsLayer = () => {
     sw.draw();
   };
 };
+*/
 
 const hookTokenLayer = () => {
   // Hook TokenLayer.activate / deactivate
@@ -145,9 +150,9 @@ const hookTokenLayer = () => {
   //@ts-ignore
   TokenLayer.prototype.activate = function () {
     origActivate.call(this);
-    if (getCanvas().controls){
-
-      getCanvas().controls.itemPlaceables.visible = true;
+    if (getCanvas().controls) {
+      //@ts-ignore
+      getCanvas().controls?.itemPlaceables.visible = true;
     }
   };
 
@@ -155,7 +160,7 @@ const hookTokenLayer = () => {
   //@ts-ignore
   TokenLayer.prototype.deactivate = function () {
     origDeactivate.call(this);
-    if (getCanvas().controls){
+    if (getCanvas().controls) {
       //@ts-ignore
       getCanvas().controls.itemPlaceables.visible = false;
     }

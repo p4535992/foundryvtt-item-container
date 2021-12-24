@@ -1,3 +1,9 @@
+// import { fields } from '@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/module.mjs';
+import DocumentData from '@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/abstract/data.mjs';
+import { ItemDataSchema } from '@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs/itemData';
+import { ItemData } from '@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/module.mjs';
+import { ItemPlaceableDataSchema } from './ItemPlaceableDataSchema';
+
 const fields = foundry.data.fields;
 
 /**
@@ -23,16 +29,42 @@ const fields = foundry.data.fields;
  * @property {boolean} [hidden]           Hide from players (hidden on `true`)
  * @property {boolean} [animate]          Animate movement within scene (animate on `true`)
  */
-export class ItemPlaceableData extends foundry.abstract.DocumentData {
-  static defineSchema() {
+export class ItemPlaceableData extends ItemData {
+  // foundry.abstract.DocumentData
+
+  /**
+   * The default icon used for newly created Item documents
+   * @defaultValue `"icons/svg/item-bag.svg"`
+   */
+  static DEFAULT_ICON: string;
+
+  x;
+  y;
+
+  static defineSchema(): ItemPlaceableDataSchema {
     return {
+      // Original itemdata
       _id: fields.DOCUMENT_ID,
-      scene: {
-        ...fields.DOCUMENT_ID,
+      name: fields.REQUIRED_STRING,
+      type: {
+        type: <any>fields.STRING_FIELD,
+        required: true,
+        validate: (t: unknown) => true,
+        validationError: 'The provided Item type must be in the array of types defined by the game system',
+      },
+      img: <any>'',
+      data: <any>{}, // TODO
+      effects: <any>{},
+      folder: <any>{},
+      sort: <any>fields.INTEGER_SORT_FIELD,
+      permission: <any>fields.DOCUMENT_PERMISSIONS,
+      flags: <any>fields.OBJECT_FIELD,
+      // Added
+      scene: <any>{
+        _id: <any>'',
         required: false,
         nullable: true,
       },
-      name: fields.REQUIRED_STRING,
       x: fields.REQUIRED_NUMBER,
       y: fields.REQUIRED_NUMBER,
       label: fields.STRING_FIELD,

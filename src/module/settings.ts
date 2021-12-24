@@ -1,4 +1,4 @@
-import { i18n } from '../smarteasy-target';
+import { i18n } from '../main';
 
 export const ITEM_PLACEABLE_MODULE_NAME = 'item-placeable';
 

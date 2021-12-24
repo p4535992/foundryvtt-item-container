@@ -1,5 +1,9 @@
+import { getCanvas, getGame } from './settings';
+
 export const GMs = () => {
-  return [...getGame().users.values()].filter((u) => u.active && u.isGM).sort((a, b) => a.id > b.id);
+  return [...(<IterableIterator<User>>getGame().users?.values())]
+    .filter((u: User) => u.active && u.isGM)
+    .sort((a, b) => (<string>a.id).localeCompare(<string>b.id));
 };
 
 const isFirstGM = () => {
@@ -15,7 +19,7 @@ export const handleTokenSelectRequestPlayer = async (data) => {
   }
 
   // find target scene
-  const targetScene = getGame().scenes.find((scene) => scene._id === targetSceneId);
+  const targetScene = getGame().scenes?.find((scene) => scene._id === targetSceneId);
   if (!targetScene) {
     console.warn('target scene not found', data);
     return;
@@ -28,14 +32,16 @@ export const handleTokenSelectRequestPlayer = async (data) => {
   // we then may end up with a different token selected
 
   // re-select tokens on target scene
-  const targetTokens = getCanvas().tokens.placeables.filter((token) => selectedTokenIds.indexOf(token.id) >= 0);
+  const targetTokens = <Token[]>(
+    getCanvas().tokens?.placeables.filter((token) => selectedTokenIds.indexOf(token.id) >= 0)
+  );
   for (const token of targetTokens) {
     token.control();
   }
 
-  // pan to stairway target
+  // pan to itemPlaceable target
   getCanvas().pan({ x: targetData.x, y: targetData.y });
 
   // call hook
-  Hooks.callAll('StairwayTeleport', data);
+  Hooks.callAll('ItemPlaceableRender', data);
 };

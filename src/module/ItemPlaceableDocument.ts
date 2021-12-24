@@ -1,4 +1,4 @@
-import { BaseItemPlaceable } from './BaseItemPlaceable.js';
+import { BaseItemPlaceable } from './BaseItemPlaceable';
 
 /**
  * The client-side ItemPlaceable embedded document which extends the common BaseItemPlaceable abstraction.
