@@ -1,7 +1,3 @@
-// import { fields } from '@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/module.mjs';
-import DocumentData from '@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/abstract/data.mjs';
-import { ItemDataSchema } from '@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs/itemData';
-import { ItemData } from '@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/module.mjs';
 import { ItemPlaceableDataSchema } from './ItemPlaceableDataSchema';
 
 const fields = foundry.data.fields;
@@ -29,7 +25,7 @@ const fields = foundry.data.fields;
  * @property {boolean} [hidden]           Hide from players (hidden on `true`)
  * @property {boolean} [animate]          Animate movement within scene (animate on `true`)
  */
-export class ItemPlaceableData extends ItemData {
+export class ItemPlaceableData extends foundry.data.ItemData {
   // foundry.abstract.DocumentData
 
   /**
@@ -42,6 +38,7 @@ export class ItemPlaceableData extends ItemData {
   y: number;
   hidden: boolean;
   elevation: number;
+  name:string;
 
   static defineSchema(): ItemPlaceableDataSchema {
     return {
@@ -63,7 +60,7 @@ export class ItemPlaceableData extends ItemData {
       flags: <any>fields.OBJECT_FIELD,
       // Added item placeable data
       scene: <any>{
-        _id: <any>'',
+        id: <any>'',
         required: false,
         nullable: true,
       },
@@ -77,6 +74,7 @@ export class ItemPlaceableData extends ItemData {
       disabled: fields.BOOLEAN_FIELD,
       hidden: fields.BOOLEAN_FIELD,
       animate: fields.BOOLEAN_FIELD,
+      // isEmbedded: fields.BOOLEAN_FIELD,
     };
   }
 

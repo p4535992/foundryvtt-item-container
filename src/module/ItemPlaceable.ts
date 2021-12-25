@@ -1,5 +1,7 @@
+import { Document } from '@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/abstract/module.mjs';
 import { ItemPlaceableControl } from './ItemPlaceableControl';
 import { ItemPlaceableControlIcon } from './ItemPlaceableControlIcon';
+import { ItemPlaceableDocument } from './ItemPlaceableDocument';
 import { getCanvas, getGame } from './settings';
 
 /**
@@ -23,6 +25,44 @@ export class ItemPlaceable extends PlaceableObject {
   color;
 
   itemPlaceableControl: ItemPlaceableControl;
+
+  constructor(name:string, type:string,
+    x:number, y:number, sceneId:string){
+    //@ts-ignore
+    super(new ItemPlaceableDocument({
+      name: name,
+      x: x,
+      y: y,
+      scene:{
+        id: sceneId,
+        required: false,
+        nullable: true,
+      },
+      type: type,
+      // isEmbedded: true,
+    }));
+    
+    // if(!this.document){
+    //   //@ts-ignore
+    //   this.document = new ItemPlaceableDocument({
+    //     name: name,
+    //     x: x,
+    //     y: y,
+    //     scene:{
+    //       id: sceneId,
+    //       required: false,
+    //       nullable: true,
+    //     }
+    //   }); // Document<any, Scene>
+    // }
+  }
+
+  // constructor(document){
+  //   //@ts-ignore
+  //   super(new ItemPlaceableDocument());
+  //   //@ts-ignore
+  //   this.document = new ItemPlaceableDocument(); // Document<any, Scene>
+  // }
 
   /* -------------------------------------------- */
 
@@ -50,7 +90,7 @@ export class ItemPlaceable extends PlaceableObject {
   get label() {
     return typeof this.data.label === 'string' ? this.data.label : '';
   }
-
+  
   /* -------------------------------------------- */
 
   /**
@@ -306,18 +346,18 @@ export class ItemPlaceable extends PlaceableObject {
     this.controlIcon.typeColor = background;
     this.controlIcon.statusColor = border;
     this.controlIcon.draw();
-    */
+    
     // lock icon
     this.lockIcon.width = this.lockIcon.height = ItemPlaceableControlIcon.iconSize * 0.5;
-    this.lockIcon.texture = 'icons/svg/padlock.svg'; // await loadTexture('icons/svg/padlock.svg');
-
+    this.lockIcon.texture = await loadTexture('icons/svg/padlock.svg');
+    
     // Update visibility
     this.alpha = this.data.hidden === true ? 0.5 : 1.0;
     this.line.visible = this.layer._accessibleActive;
     this.lockIcon.visible = this.layer._accessibleActive && this.data.disabled === true;
     this.controlIcon.visible = this.layer._accessibleActive;
     this.controlIcon.border.visible = this._hover; // || this.isConnectionTarget;
-
+    */
     return this;
   }
 

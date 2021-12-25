@@ -1,5 +1,3 @@
-import Document from '@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/abstract/document.mjs';
-import { ItemData } from '@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/module.mjs';
 import { ItemPlaceableData } from './ItemPlaceableData';
 import { ItemPlaceableDocument } from './ItemPlaceableDocument';
 
@@ -11,7 +9,7 @@ import { ItemPlaceableDocument } from './ItemPlaceableDocument';
  * @param {object} data                     Initial data from which to construct the embedded document.
  * @property {data.ItemPlaceableData} data       The constructed data object for the embedded document.
  */
-export class BaseItemPlaceable extends Document<ItemPlaceableData, ItemPlaceableDocument> {
+export class BaseItemPlaceable<Item, Scene> extends foundry.abstract.Document<ItemPlaceableData, ItemPlaceableDocument> {
   //  foundry.abstract.Document
 
   constructor(data?: any, context?: any) {

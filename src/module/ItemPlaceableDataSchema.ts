@@ -1,5 +1,4 @@
 import { ItemDataSchema } from '@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/data.mjs/itemData';
-import { fields } from '@league-of-foundry-developers/foundry-vtt-types/src/foundry/common/data/module.mjs';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface ItemPlaceableDataSchema extends ItemDataSchema {
@@ -23,14 +22,14 @@ export interface ItemPlaceableDataSchema extends ItemDataSchema {
     required: false;
     nullable: true;
   };
-  x: typeof fields.REQUIRED_NUMBER;
-  y: typeof fields.REQUIRED_NUMBER;
-  label: typeof fields.STRING_FIELD;
-  fontFamily: typeof fields.STRING_FIELD;
-  fontSize: typeof fields.NONNEGATIVE_INTEGER_FIELD;
-  textColor: typeof fields.COLOR_FIELD;
-  icon: typeof fields.IMAGE_FIELD;
-  disabled: typeof fields.BOOLEAN_FIELD;
-  hidden: typeof fields.BOOLEAN_FIELD;
-  animate: typeof fields.BOOLEAN_FIELD;
+  x: typeof foundry.data.fields.REQUIRED_NUMBER;
+  y: typeof foundry.data.fields.REQUIRED_NUMBER;
+  label: typeof foundry.data.fields.STRING_FIELD;
+  fontFamily: typeof foundry.data.fields.STRING_FIELD;
+  fontSize: typeof foundry.data.fields.NONNEGATIVE_INTEGER_FIELD;
+  textColor: typeof foundry.data.fields.COLOR_FIELD;
+  icon: typeof foundry.data.fields.IMAGE_FIELD;
+  disabled: typeof foundry.data.fields.BOOLEAN_FIELD;
+  hidden: typeof foundry.data.fields.BOOLEAN_FIELD;
+  animate: typeof foundry.data.fields.BOOLEAN_FIELD;
 }

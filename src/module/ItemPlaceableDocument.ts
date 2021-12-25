@@ -15,4 +15,9 @@ import { BaseItemPlaceable } from './BaseItemPlaceable';
  * @param {data.ItemPlaceableData} [data={}]       Initial data provided to construct the ItemPlaceable document
  * @param {Scene} parent                The parent Scene document to which this ItemPlaceable belongs
  */
-export class ItemPlaceableDocument extends CanvasDocumentMixin(BaseItemPlaceable) {}
+export class ItemPlaceableDocument extends CanvasDocumentMixin(BaseItemPlaceable) {
+
+    get isEmbedded(): boolean {
+        return true;
+    }
+}

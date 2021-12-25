@@ -151,9 +151,11 @@ const hookTokenLayer = () => {
   //@ts-ignore
   TokenLayer.prototype.activate = function () {
     origActivate.call(this);
-    if (getCanvas().controls) {
+    //@ts-ignore
+    if (getCanvas().controls?.itemPlaceables) {
+      // getCanvas().controls?.itemPlaceables.visible = true;
       //@ts-ignore
-      getCanvas().controls?.itemPlaceables.visible = true;
+      setProperty(getCanvas().controls?.itemPlaceables,'visible', true);
     }
   };
 
