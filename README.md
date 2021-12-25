@@ -1,4 +1,4 @@
-# Item Container (Placeable object for item)
+# Item Placeable (Placeable object for item)
 
 ![Latest Release Download Count](https://img.shields.io/github/downloads/p4535992/foundryvtt-item-placeable/latest/module.zip?color=2b82fc&label=DOWNLOADS&style=for-the-badge) 
 
