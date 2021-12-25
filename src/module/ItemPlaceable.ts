@@ -26,42 +26,36 @@ export class ItemPlaceable extends PlaceableObject {
 
   itemPlaceableControl: ItemPlaceableControl;
 
-  constructor(name:string, type:string,
-    x:number, y:number, sceneId:string){
+  constructor(name:string|ItemPlaceableDocument, type:string|Scene, icon:string|undefined,
+    x:number|undefined, y:number|undefined, sceneId:string|undefined){
     //@ts-ignore
     super(new ItemPlaceableDocument({
-      name: name,
-      x: x,
-      y: y,
+      name: name instanceof ItemPlaceableDocument ? name.data.name : name,
+      x: name instanceof ItemPlaceableDocument ? name.data.x : x,
+      y: name instanceof ItemPlaceableDocument ? name.data.y : y,
       scene:{
-        id: sceneId,
+        id: type instanceof Scene ? type.id : sceneId,
         required: false,
         nullable: true,
       },
-      type: type,
-      // isEmbedded: true,
+      type: name instanceof ItemPlaceableDocument ? name.data.type : type,
+      icon: name instanceof ItemPlaceableDocument ? name.data.img : icon
     }));
-    
-    // if(!this.document){
-    //   //@ts-ignore
-    //   this.document = new ItemPlaceableDocument({
-    //     name: name,
-    //     x: x,
-    //     y: y,
-    //     scene:{
-    //       id: sceneId,
-    //       required: false,
-    //       nullable: true,
-    //     }
-    //   }); // Document<any, Scene>
-    // }
   }
 
-  // constructor(document){
-  //   //@ts-ignore
-  //   super(new ItemPlaceableDocument());
-  //   //@ts-ignore
-  //   this.document = new ItemPlaceableDocument(); // Document<any, Scene>
+  // constructor(document:ItemPlaceableDocument, scene:Scene) {
+  //   super(new ItemPlaceableDocument({
+  //     name: document.name,
+  //     x: document.data.x,
+  //     y: document.data.y,
+  //     scene:{
+  //       id: scene.id,
+  //       required: false,
+  //       nullable: true,
+  //     },
+  //     type: document.data.type,
+  //     icon: document.data.icon
+  //   }));
   // }
 
   /* -------------------------------------------- */
@@ -79,8 +73,8 @@ export class ItemPlaceable extends PlaceableObject {
   //   ItemPlaceable.connectionTarget = {};
   // }
 
-  get icon(): PIXI.Sprite {
-    return <PIXI.Sprite>this.data.icon;
+  get icon(): string {
+    return this.data.icon ? this.data.icon : this.data.img;
   }
 
   get iconSrc(): string {
@@ -276,7 +270,8 @@ export class ItemPlaceable extends PlaceableObject {
   clear() {
     if (this.controlIcon) {
       this.controlIcon.parent.removeChild(this.controlIcon).destroy();
-      this.controlIcon = new ItemPlaceableControlIcon();
+      //@ts-ignore
+      this.controlIcon = null;
     }
     super.clear();
     return this;
@@ -291,7 +286,7 @@ export class ItemPlaceable extends PlaceableObject {
       new ItemPlaceableControlIcon({
         label: this.label,
         textStyle: this.labelTextStyle,
-        texture: this.iconSrc, //this.icon,
+        texture: this.icon,
       }),
     );
     this.lockIcon = this.addChild(new PIXI.Sprite());
@@ -305,7 +300,8 @@ export class ItemPlaceable extends PlaceableObject {
   /* -------------------------------------------- */
 
   /** @override */
-  refresh(): this {
+  //@ts-ignore
+  async refresh() {
     // update state
     this.position.set(this.data.x, this.data.y);
     // this.updateOtherPlaceable();
@@ -340,11 +336,11 @@ export class ItemPlaceable extends PlaceableObject {
     }
     */
     // update icon tint
-    /*
-    const { background, border } = this.status.color;
+    
+    // const { background, border } = this.status.color;
     this.controlIcon.tint = this.data.disabled === true ? 0x999999 : 0x000000;
-    this.controlIcon.typeColor = background;
-    this.controlIcon.statusColor = border;
+    // this.controlIcon.typeColor = background;
+    // this.controlIcon.statusColor = border;
     this.controlIcon.draw();
     
     // lock icon
@@ -357,7 +353,7 @@ export class ItemPlaceable extends PlaceableObject {
     this.lockIcon.visible = this.layer._accessibleActive && this.data.disabled === true;
     this.controlIcon.visible = this.layer._accessibleActive;
     this.controlIcon.border.visible = this._hover; // || this.isConnectionTarget;
-    */
+    
     return this;
   }
 
@@ -476,8 +472,7 @@ export class ItemPlaceable extends PlaceableObject {
     // }
 
     // update sight when new itemPlaceable was added
-    //@ts-ignore
-    getCanvas().addPendingOperation('SightLayer.refresh', getCanvas().sight?.refresh, getCanvas().sight, {});
+    // getCanvas().addPendingOperation('SightLayer.refresh', getCanvas().sight?.refresh, getCanvas().sight, {});
   }
 
   /* -------------------------------------------- */

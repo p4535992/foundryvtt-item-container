@@ -22,7 +22,7 @@ export const injectItemPlaceables = () => {
   hookCanvas();
   hookBaseScene();
   hookSceneData();
-  // hookControlsLayer();
+  hookControlsLayer();
   hookTokenLayer();
 
   // add itemPlaceables as embedded document for existing scenes
@@ -117,33 +117,37 @@ const hookSceneData = () => {
   };
 };
 
-/*
+
 const hookControlsLayer = () => {
   // Hook ControlsLayer.draw
   const origDraw = ControlsLayer.prototype.draw;
+  //@ts-ignore
   ControlsLayer.prototype.draw = function () {
     this.drawItemPlaceables();
     origDraw.call(this);
   };
+  //@ts-ignore
   ControlsLayer.prototype.drawItemPlaceables = function () {
     // Create the container
     if (this.itemPlaceables) this.itemPlaceables.destroy({ children: true });
     this.itemPlaceables = this.addChild(new PIXI.Container());
 
     // Iterate over all itemPlaceables
-    for (const itemPlaceable of getCanvas().itemPlaceables.placeables) {
+    //@ts-ignore
+    for (const itemPlaceable of canvas.itemPlaceables.placeables) {
       this.createItemPlaceableControl(itemPlaceable);
     }
-
-    this.itemPlaceables.visible = !getCanvas().itemPlaceables._active;
+    //@ts-ignore
+    this.itemPlaceables.visible = !canvas.itemPlaceables._active;
   };
+  //@ts-ignore
   ControlsLayer.prototype.createItemPlaceableControl = function (itemPlaceable) {
     const ip = this.itemPlaceables.addChild(new ItemPlaceableControl(itemPlaceable));
     ip.visible = false;
     ip.draw();
   };
 };
-*/
+
 
 const hookTokenLayer = () => {
   // Hook TokenLayer.activate / deactivate

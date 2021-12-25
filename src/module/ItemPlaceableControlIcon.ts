@@ -65,7 +65,8 @@ export class ItemPlaceableControlIcon extends ControlIcon {
   /* -------------------------------------------- */
 
   static get scale() {
-    return (getCanvas().dimensions?.size || 100) / 100;
+    //return (getCanvas().dimensions?.size || 100) / 100;
+    return 1;
   }
 
   /* -------------------------------------------- */

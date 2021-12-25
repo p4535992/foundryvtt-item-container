@@ -12,7 +12,12 @@
 
 This module add to foundry a placeable object for the item document
 
-Still in beta
+The starting code is shamefully based on that of the [Stairway](https://gitlab.com/SWW13/foundryvtt-stairways) module which I used as a starting point. I invite those who want modules of this type to support the authors who have provided inspiration for this module:
+
+- [Stairway](https://gitlab.com/SWW13/foundryvtt-stairways) thanks to [SWW13](https://gitlab.com/SWW13)
+- [DFreds Droppables](https://github.com/DFreds/dfreds-droppables) thanks to [DFreds](https://github.com/DFreds)
+
+## HELP WANTED i just got stuck, the item placeable is created , but is not displayed on the canvas i don't understad why??? any help on this is more than welcome
 
 ## Installation
 

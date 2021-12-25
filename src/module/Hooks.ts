@@ -8,6 +8,7 @@ import { handleModifyEmbeddedDocument, hookModifyDocument } from './ItemPlaceabl
 import { ItemPlaceable } from './ItemPlaceable';
 
 export const readyHooks = async () => {
+
   //
   // https://github.com/ruipin/fvtt-lib-wrapper/#134-shim
   // Note: Don't simply pass in the function onCanvasDrop, or you lose 'this' referring to Droppable
@@ -25,13 +26,13 @@ export const readyHooks = async () => {
   //   injectControls(controls);
   // });
 
-  Hooks.on('sightRefresh', (sightLayer) => {
-    // ItemPlaceable Icons
-    //@ts-ignore
-    for (const ip of getCanvas().controls?.itemPlaceables?.children) {
-      ip.visible = !sightLayer.tokenVision || ip.isVisible;
-    }
-  });
+  // Hooks.on('sightRefresh', (sightLayer) => {
+  //   // ItemPlaceable Icons
+  //   //@ts-ignore
+  //   for (const ip of getCanvas().controls?.itemPlaceables?.children) {
+  //     ip.visible = !sightLayer.tokenVision || ip.isVisible;
+  //   }
+  // });
 };
 
 export const initHooks = async () => {
@@ -120,7 +121,7 @@ async function _dropItem(canvas:Canvas, item: Item,
   //@ts-ignore
   if(!item.data.itemPlaceable){
     //@ts-ignore
-    item.data.itemPlaceable = new ItemPlaceable(item.name, item.type,
+    item.data.itemPlaceable = new ItemPlaceable(item.name, item.type, item.img,
       xPosition, yPosition, getCanvas().scene?.id);
   }
   //@ts-ignore

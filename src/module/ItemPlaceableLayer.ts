@@ -4,7 +4,7 @@ import { ItemPlaceableDocument } from './ItemPlaceableDocument';
 import { getGame, getCanvas } from './settings';
 
 // Between WallsLayer (40), TemplateLayer (50), TokenLayer (100)
-const ITEM_PLACEABLE_LAYER_ZINDEX = 101;
+const ITEM_PLACEABLE_LAYER_ZINDEX = 100;
 
 TokenLayer
 /**

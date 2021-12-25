@@ -74,7 +74,6 @@ export class ItemPlaceableData extends foundry.data.ItemData {
       disabled: fields.BOOLEAN_FIELD,
       hidden: fields.BOOLEAN_FIELD,
       animate: fields.BOOLEAN_FIELD,
-      // isEmbedded: fields.BOOLEAN_FIELD,
     };
   }
 
