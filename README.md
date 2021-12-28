@@ -19,6 +19,8 @@ The starting code is shamefully based on that of the [Stairway](https://gitlab.c
 
 ## HELP WANTED i just got stuck, the item placeable is created , but is not displayed on the canvas i don't understad why??? any help on this is more than welcome
 
+## The project can be useful to anyone wishing to create their own customized document to be applied on FoundryVTT, but for the purpose for which the project was born it is abandoned in favor of [FoundryVTT-ItemPiles](https://github.com/Haxxer/FoundryVTT-ItemPiles/)
+
 ## Installation
 
 It's always easiest to install modules from the in game add-on browser.
